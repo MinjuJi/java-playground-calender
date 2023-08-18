@@ -22,25 +22,31 @@ public class Calender {
 		} else if (month == 2) {
 			return 28;
 		}
-		return 0;
+		return -1;
 	}
 
 	public static void main(String[] args) {
 
 		Scanner kb = new Scanner(System.in);
+		Calender calender = new Calender();
 
-		System.out.print("월 입력: ");
-		int month = kb.nextInt();
-		kb.close();
+		System.out.print("반복 횟수 입력: ");
+		int repeat = kb.nextInt();
 
-		if (month < 1 || month > 12) {
-			System.out.println("1 ~ 12 사이 숫자를 입력해주세요.");
-		} else {
-			Calender calender = new Calender();
-			int maxDay = calender.getMaxDayOfMonth(month);
-			System.out.println(maxDay);
+		for (int i = 0; i < repeat; i++) {
+
+			System.out.print("월 입력: ");
+			int month = kb.nextInt();
+
+			if (month < 1 || month > 12) {
+				System.out.println("1 ~ 12 사이 숫자를 입력해주세요.");
+			} else {
+				int maxDay = calender.getMaxDayOfMonth(month);
+				System.out.println(maxDay + " ");
+			}
+
 		}
-
+		kb.close();
 	}
 
 }
