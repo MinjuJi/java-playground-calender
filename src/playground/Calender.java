@@ -38,7 +38,7 @@ public class Calender {
 			System.out.print("월 입력: ");
 			int month = kb.nextInt();
 
-			if (month < 1 || month > 12) {
+			if (calender.getMaxDayOfMonth(month) == -1) {
 				System.out.println("1 ~ 12 사이 숫자를 입력해주세요.");
 			} else {
 				int maxDay = calender.getMaxDayOfMonth(month);
