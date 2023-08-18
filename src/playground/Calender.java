@@ -13,7 +13,7 @@ public class Calender {
 			} else {
 				return 31;
 			}
-		} else if (month > 7) {
+		} else if (month > 7 && month <= 12) {
 			if (month % 2 == 0) {
 				return 31;
 			} else {
@@ -29,13 +29,15 @@ public class Calender {
 
 		Scanner kb = new Scanner(System.in);
 		Calender calender = new Calender();
-
+		String PROMPT = "cal> "; 
+		
 		System.out.print("반복 횟수 입력: ");
 		int repeat = kb.nextInt();
 
 		for (int i = 0; i < repeat; i++) {
 
-			System.out.print("월 입력: ");
+			System.out.print("\n월 입력: ");
+			System.out.print(PROMPT);
 			int month = kb.nextInt();
 
 			if (calender.getMaxDayOfMonth(month) == -1) {
