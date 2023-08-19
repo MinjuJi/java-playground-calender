@@ -1,6 +1,6 @@
 package playground;
 
-public class DayOfCalender {
+public class DayOfCalendar {
 
 	// 윤년 판별 메소드
 	private static boolean isLeapYear(int year) {

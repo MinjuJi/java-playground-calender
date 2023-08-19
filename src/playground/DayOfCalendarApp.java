@@ -4,7 +4,7 @@ package playground;
 
 import java.util.Scanner;
 
-public class DayOfCalenderApp {
+public class DayOfCalendarApp {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class DayOfCalenderApp {
 		System.out.print("월 입력 : ");
 		int month = sc.nextInt();
 
-		DayOfCalender.prn(year, month);
+		DayOfCalendar.prn(year, month);
 
 		sc.close();
 	}
