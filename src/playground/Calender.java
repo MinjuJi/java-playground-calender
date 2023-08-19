@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Calender {
 
-	private int getMaxDayOfMonth(int month) {
+	private int getMaxDayOfMonth(int month, int year) {
 
-		// 윤년 제외
+		// 윤년 포함
 		if (month <= 7 && month >= 3 || month == 1) {
 			if (month % 2 == 0) {
 				return 30;
@@ -20,17 +20,21 @@ public class Calender {
 				return 30;
 			}
 		} else if (month == 2) {
-			return 28;
+			if (year % 4 == 0 && (year != 100 || year % 400 == 0)) {
+				return 29;
+			} else {
+				return 28;
+			}
 		}
 		return -1;
 	}
 
 	public void printCalender(int year, int month) {
-		System.out.println("\n" + "     " + year + "년 " + month + "월");
+		System.out.printf("%n %10d년 %d월 %n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("----------------------");
 
-		int maxDay = getMaxDayOfMonth(month);
+		int maxDay = getMaxDayOfMonth(month, year);
 		for (int i = 1; i <= maxDay; i++) {
 			System.out.printf("%3d", i);
 			if (i % 7 == 0) {
@@ -43,16 +47,17 @@ public class Calender {
 
 		Scanner kb = new Scanner(System.in);
 		Calender calender = new Calender();
-		String PROMPT = "cal> ";
+
+		System.out.print("년 입력: ");
+		int year = kb.nextInt();
 
 		System.out.print("월 입력: ");
-		System.out.print(PROMPT);
 		int month = kb.nextInt();
 
-		if (calender.getMaxDayOfMonth(month) == -1) {
+		if (calender.getMaxDayOfMonth(month, year) == -1) {
 			System.out.println("1 ~ 12 사이 숫자를 입력해주세요.");
 		} else {
-			calender.printCalender(2023, month);
+			calender.printCalender(year, month);
 		}
 
 		kb.close();
