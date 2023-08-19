@@ -1,3 +1,5 @@
+// 프로그램: 연도와 월을 입력 받아 월요일 ~ 일요일 순의 달력 생성 프로그램 
+// 가정: 1년 1월 1일은 일요일 
 package playground;
 
 import java.util.Scanner;

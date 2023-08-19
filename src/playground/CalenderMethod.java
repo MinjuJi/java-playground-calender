@@ -88,6 +88,7 @@ public class CalenderMethod {
 			System.out.printf("\t\t%8d년 %2d월\n\n", year, month);
 			System.out.printf("월\t화\t수\t목\t금\t토\t일\n");
 
+			// 월요일 ~ 일요일 순으로 달력을 생성하기 위해 'getDayOfWeek(year, month) - 1'을 해주고, 'start = -1' (일요일)인 경우 start = 6으로 설정한다.
 			int start = getDayOfWeek(year, month) - 1;
 			int last = getDate(year, month);
 
