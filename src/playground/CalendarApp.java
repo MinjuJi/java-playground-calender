@@ -5,10 +5,10 @@ package playground;
 
 import java.util.Scanner;
 
-public class CalenderApp {
+public class CalendarApp {
 
 	public static void main(String[] args) {
-
+		
 		Scanner kb = new Scanner(System.in);
 
 		while (true) {
@@ -23,7 +23,7 @@ public class CalenderApp {
 				System.out.print("월 입력 :");
 				int month = kb.nextInt();
 
-				CalenderMethod.print(year, month);
+				CalendarMethod.print(year, month);
 				System.out.println("\n");
 
 			} else if (input.equals("종료")) {

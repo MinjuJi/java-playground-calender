@@ -1,6 +1,6 @@
 package playground;
 
-public class CalenderMethod {
+public class CalendarMethod {
 
 	// 윤년 판별 함수
 	private static boolean isLeapYear(int year) {
