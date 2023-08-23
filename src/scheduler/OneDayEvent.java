@@ -9,7 +9,7 @@ public class OneDayEvent extends Event {
 	}
 
 	public String toString() {
-		return title + " " + date.toString();
+		return "[OneDay] : " + title + " : " + date.toString();
 	}
 	
 	public boolean isRelevant(MyDate date) {

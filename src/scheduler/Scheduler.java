@@ -1,5 +1,11 @@
 package scheduler;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -150,7 +156,7 @@ public class Scheduler {
 		String biginDate = kb.next();
 		System.out.print("yyyy/mm/dd 종료일: ");
 		String endDate = kb.next();
-		
+
 		MyDate bigin = parseDateString(biginDate);
 		MyDate end = parseDateString(endDate);
 
@@ -162,7 +168,7 @@ public class Scheduler {
 		kb.nextLine();
 		System.out.print("title: ");
 		String title = kb.nextLine();
-		
+
 		DurationEvent ev = new DurationEvent(title, bigin, end);
 		addEvent(ev);
 	}
@@ -182,12 +188,74 @@ public class Scheduler {
 
 	private void addEvent(Event ev) {
 		events.add(ev);
-		System.out.println("이벤트가 추가되었습니다.");
+		System.out.println("\n이벤트가 추가되었습니다.");
+	}
+
+	private void saveEventsToFile() {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("schedule.txt"));
+
+			for (Event tmp : events) {
+				bw.write(tmp.toString());
+				bw.newLine(); // 다음 줄로 넘어가기
+			}
+			bw.close();
+			System.out.println("이벤트 데이터가 파일에 저장되었습니다.");
+		} catch (IOException e) {
+			System.out.println("파일 저장 중 오류가 발생했습니다.");
+		}
+
+	}
+
+	private void loadEventsFromFile() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("schedule.txt"));
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				Event ev = parseEventsString(line);
+
+				if (ev != null)
+					events.add(ev);
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("현재 이벤트가 저장된 파일이 생성되지 않았습니다.");
+		} catch (Exception e) {
+			System.out.println("파일 불러오기 중 오류가 발생했습니다.");
+		}
+	}
+
+	private Event parseEventsString(String line) {
+
+		String[] tokens = line.split("\\s*:\\s*~|\\s*~\\s*|\\s*:\\s");
+
+		if (tokens[0].equals("[OneDay]")) {
+			String title = tokens[1];
+			MyDate date = parseDateString(tokens[2]);
+			return new OneDayEvent(title, date);
+
+		} else if (tokens[0].equals("[Duration]")) {
+			String title = tokens[1];
+			MyDate bigin = parseDateString(tokens[2]);
+			MyDate end = parseDateString(tokens[3]);
+			return new DurationEvent(title, bigin, end);
+
+		} else if (tokens[0].equals("[DeadLine]")) {
+			String title = tokens[1];
+			MyDate deadline = parseDateString(tokens[2]);
+			return new DeadLinedEvent(title, deadline);
+		}
+
+		return null;
 	}
 
 	public static void main(String[] args) {
 		Scheduler app = new Scheduler();
+
+		app.loadEventsFromFile();
 		app.processCommand();
+		app.saveEventsToFile();
 	}
 
 }

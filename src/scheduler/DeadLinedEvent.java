@@ -9,7 +9,7 @@ public class DeadLinedEvent extends Event {
 	}
 
 	public String toString() {
-		return title + " ~" + deadline.toString() + "까지";
+		return "[DeadLine] : " + title + " : " + "~"+deadline.toString();
 	}
 
 	public boolean isRelevant(MyDate date) { // date <= deadLine

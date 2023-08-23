@@ -11,7 +11,7 @@ public class DurationEvent extends Event {
 	}
 
 	public String toString() {
-		return title + " " + begin.toString() + " ~ " + end.toString();
+		return "[Duration] : " + title + " : " + begin.toString() + " ~ " + end.toString();
 	}
 
 	public boolean isRelevant(MyDate date) { // begin <= date <= end
@@ -19,6 +19,6 @@ public class DurationEvent extends Event {
 	}
 	
 	public MyDate getRepresentativeDate() {
-		return begin;
+		return end;
 	}
 }
